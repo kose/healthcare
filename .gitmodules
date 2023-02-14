@@ -1,0 +1,3 @@
+[submodule "Simple-Apple-Health-XML-to-CSV"]
+	path = Simple-Apple-Health-XML-to-CSV
+	url = https://github.com/jameno/Simple-Apple-Health-XML-to-CSV.git
