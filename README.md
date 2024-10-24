@@ -1,8 +1,10 @@
 # healthcare
 
+![](images/healthcare.png)
+
 ## これは?
 
-iOSのヘルスケアのデータをpythonでグラフを書こう！
+iOSのヘルスケアのデータでグラフを書こう！
 
 ## Reference
 
