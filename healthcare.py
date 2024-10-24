@@ -72,14 +72,15 @@ def blood_pressure(df_sbp, df_dbp):
     plt.suptitle("血圧（月ごとの箱髭図）")
     ax.set_ylabel("mmHg")
 
-    plt.locator_params(axis='x', nbins=35) #x軸，x個以内．
+    # x軸のラベルを6ヶ月ごとに
+    plt.xticks(ticks=np.arange(1, len(df.month.unique())+1, 6), labels=df.month.unique()[::6], rotation=80)
+    
     plt.subplots_adjust(left=0.04, right=0.98, bottom=0.2, top=0.92)
 
     if not(os.path.isfile(pngfile)):
         plt.savefig(pngfile)
 
     plt.pause(5)
-
 
 
 def body_temperature(df):
@@ -190,7 +191,6 @@ def body_mass(df):
     ax.set_ylabel("kg")
 
     plt.subplots_adjust(left=0.04, right=0.98, bottom=0.15, top=0.89)
-    plt.locator_params(axis='x', nbins=16) #x軸，x個以内．
 
     if not(os.path.isfile(pngfile)):
         plt.savefig(pngfile)
@@ -256,7 +256,7 @@ def distance_walking(df):
 
 def main():
 
-    df = pd.read_csv(csvfile)
+    df = pd.read_csv(csvfile, low_memory=False)
     
     index_sbp = df.type == "BloodPressureSystolic"
     index_dbp = df.type == "BloodPressureDiastolic"
@@ -264,7 +264,7 @@ def main():
     
     index = df.type == "DistanceWalkingRunning"
     distance_walking(df[index])
-
+    
     index = df.type == "BodyMass"
     body_mass(df[index])
     
@@ -275,11 +275,12 @@ def main():
     ## join image
     ##
 
-    pngfile = "images/helthcare.png"
+    pngfile = "images/healthcare.png"
     
     image_proc = np.array([], dtype=np.uint8)
 
-    for filename in ["images/blood-pressure.png", "images/body-mass.png", "images/body-temperature.png", "images/distance-walking.png"]:
+    # for filename in ["images/blood-pressure.png", "images/body-mass.png", "images/body-temperature.png", "images/distance-walking.png"]:
+    for filename in ["images/blood-pressure.png", "images/body-mass.png", "images/distance-walking.png"]:
 
         if not(os.path.isfile(filename)):
             continue
