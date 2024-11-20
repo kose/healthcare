@@ -7,7 +7,13 @@ DBFILE=$HOME/python/healthcare/db/apple_health_export.csv
 
 if test "$1" = "--clean"; then
     rm -f images/*.png
-    rm -f db/*2024*.csv
+    rm -fr /tmp/apple_health_export
+fi
+
+##
+if test ! -d /tmp/apple_health_export; then
+    cd /tmp
+    unzip -x $HOME/GoogleDrive/Downloads/書き出したデータ.zip
 fi
 
 ##
